@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="key_width">0dp</dimen>
+    <dimen name="key_height">60dp</dimen>
+    <dimen name="key_margin">4dp</dimen>
+    <dimen name="keyboard_padding">8dp</dimen>
+    <dimen name="key_text_size">18sp</dimen>
+</resources>

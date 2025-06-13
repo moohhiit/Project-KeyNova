@@ -1,0 +1,15 @@
+*.iml
+.gradle
+Application/KeyNova/local.properties
+Application/KeyNova/.idea/caches
+Application/KeyNova/.idea/libraries
+Application/KeyNova/.idea/modules.xml
+Application/KeyNova/.idea/workspace.xml
+Application/KeyNova/.idea/navEditor.xml
+Application/KeyNova/.idea/assetWizardSettings.xml
+.DS_Store
+Application/KeyNova/build
+Application/KeyNova/captures
+.externalNativeBuild
+.cxx
+local.properties
