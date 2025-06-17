@@ -12,14 +12,6 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from .ml_model import detect_content  # Your content detection function
 
-@csrf_exempt
-def analyze_text(request):
-    if request.method == 'POST':
-        body = json.loads(request.body)
-        text = body.get('text', '')
-        result = detect_content(text)
-        return JsonResponse({'result': result})
-    return JsonResponse({'error': 'Only POST method allowed'}, status=405)
 
 
 @api_view(['POST'])

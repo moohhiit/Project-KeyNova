@@ -1,1 +1,2 @@
 fuck yourself	Correct: True
+fuck off	Correct: True
