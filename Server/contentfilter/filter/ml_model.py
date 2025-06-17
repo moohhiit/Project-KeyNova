@@ -3,6 +3,13 @@ from transformers import pipeline
 import re
 
 # Trie Node and Trie
+_classifier = None
+
+def get_classifier():
+    global _classifier
+    if _classifier is None:
+        _classifier = pipeline("text-classification", model="bert-base-uncased")
+    return _classifier
 class TrieNode:
     def __init__(self):
         self.children = {}
@@ -145,27 +152,27 @@ def detect_content(text):
 
     return False, None
 
-# Console input loop
-print("📱 Type your text below (type 'exit' to quit):")
-while True:
-    user_input = input("\nInput: ")
-    if user_input.lower() == "exit":
-        print("👋 Exiting detection.")
-        break
+if __name__ == "__main__":
+    print("📱 Type your text below (type 'exit' to quit):")
+    while True:
+        user_input = input("\nInput: ")
+        if user_input.lower() == "exit":
+            print("👋 Exiting detection.")
+            break
 
-    detected, details = detect_content(user_input)
+        detected, details = detect_content(user_input)
 
-    if detected:
-        send_alert_to_parent(
-            f"{details['category']} detected.\n→ Reason: {details['reason']}"
-        )
-        if "sentiment" in details:
-            print(f"🙂 Sentiment: {details['sentiment']['label']} ({details['sentiment']['score']:.2f})")
-        if "emotion" in details:
-            print(f"😢 Emotion: {details['emotion']['label']} ({details['emotion']['score']:.2f})")
+        if detected:
+            send_alert_to_parent(
+                f"{details['category']} detected.\n→ Reason: {details['reason']}"
+            )
+            if "sentiment" in details:
+                print(f"🙂 Sentiment: {details['sentiment']['label']} ({details['sentiment']['score']:.2f})")
+            if "emotion" in details:
+                print(f"😢 Emotion: {details['emotion']['label']} ({details['emotion']['score']:.2f})")
 
-        feedback = input("Was this detection correct? (y/n): ")
-        feedback_loop(user_input, feedback.lower() == 'y')
+            feedback = input("Was this detection correct? (y/n): ")
+            feedback_loop(user_input, feedback.lower() == 'y')
 
-    else:
-        continue_typing()
+        else:
+            continue_typing()
