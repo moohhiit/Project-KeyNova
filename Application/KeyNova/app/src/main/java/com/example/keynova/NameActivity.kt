@@ -1,10 +1,12 @@
+package com.example.keynova
+
 import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.keynova.R
+
 
 class NameActivity : AppCompatActivity() {
 
@@ -12,8 +14,8 @@ class NameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_name)
 
-        val nameInput = findViewById<EditText>(R.id.editTextName)
-        val saveButton = findViewById<Button>(R.id.buttonSave)
+        val nameInput = findViewById<EditText>(R.id.editUserName)
+        val saveButton = findViewById<Button>(R.id.buttonSaveName)
 
         saveButton.setOnClickListener {
             val name = nameInput.text.toString().trim()

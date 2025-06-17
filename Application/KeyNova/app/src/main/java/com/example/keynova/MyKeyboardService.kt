@@ -1,6 +1,7 @@
 package com.example.keynova
 
 
+
 import android.app.AlertDialog
 import android.content.ClipboardManager
 import android.content.Intent
@@ -35,12 +36,15 @@ class MyKeyboardService : InputMethodService() {
             }
         }
         val settingsButton = view.findViewById<Button>(R.id.buttonSettings)
+
+
         settingsButton.setOnClickListener {
             // Open NameActivity using an intent
             val intent = Intent(this, NameActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
+
 
         val clipboardButton = view.findViewById<Button>(R.id.buttonClipboard)
         clipboardButton.setOnClickListener {
