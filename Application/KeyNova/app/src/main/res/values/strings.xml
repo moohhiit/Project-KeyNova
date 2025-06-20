@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">KeyNova</string>
+    <string name="update_you_id_key">Update You Id Key</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_private_key">Enter Your Private Key</string>
+    <string name="update_changes">Update Changes</string>
 </resources>
