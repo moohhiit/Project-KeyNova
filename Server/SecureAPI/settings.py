@@ -114,6 +114,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+<<<<<<< HEAD
 
 from mongoengine import connect
 from pymongo.errors import ConnectionFailure
@@ -125,3 +126,10 @@ try:
     print("connected")
 except ConnectionFailure:
     print("connection failed")
+=======
+from mongoengine import connect
+
+connect(db="KeyNova",
+    host="mongodb+srv://mransh1911:<db_password>@cluster0.0czkl3b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+)
+>>>>>>> 603d9e6e05758511097a644277bc0fe32d54fd46
