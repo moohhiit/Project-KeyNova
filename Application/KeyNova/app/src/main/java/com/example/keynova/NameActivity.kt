@@ -1,6 +1,5 @@
 package com.example.keynova
 
-import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -16,16 +15,27 @@ class NameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_name)
 
+        var sharedPreferences = getSharedPreferences("KeyNova"  , MODE_PRIVATE)
+
 
         val nameInput = findViewById<EditText>(R.id.editUserName)
         val saveButton = findViewById<Button>(R.id.buttonSaveName)
-        val secret_key = findViewById<EditText>(R.id.passkey)
+        val secretKey = findViewById<EditText>(R.id.passkey)
 
         saveButton.setOnClickListener {
-            
+            var username = nameInput.text.toString()
+            var key = secretKey.text.toString()
+            if (username.isEmpty() && key.isEmpty()) {
+                var editor = sharedPreferences.edit()
+                editor.putString("secret_key" , key)
+                editor.putString("username" , username)
+                editor.apply()
+            } else {
+                Toast.makeText(this, "Enter both username and secret key", Toast.LENGTH_SHORT).show()
+            }
         }
-
-        fun loginUser(username: String, password: String) {
+    }
+    private fun loginUser(username: String, password: String) {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     // 1. Login
@@ -46,4 +56,4 @@ class NameActivity : AppCompatActivity() {
             }
         }
     }
-}
+

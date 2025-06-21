@@ -4,19 +4,21 @@
 
     <style name="KeyButton">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
         <item name="android:layout_height">60dp</item>
-        <item name="android:background">#534F4F</item>
-        <item name="android:textColor">#F8F3F3</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">2dp</item>
+        <item name="android:background">@drawable/key_background</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+
     </style>
 
     <style name="SpaceButton">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">3</item>
         <item name="android:layout_height">60dp</item>
-        <item name="android:background">#4B3621</item>
+        <item name="android:background">#ffffff</item>
         <item name="android:layout_margin">2dp</item>
     </style>
 

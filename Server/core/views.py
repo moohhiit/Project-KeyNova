@@ -5,21 +5,23 @@ from .serializers import UserSerializer
 from .ml_model import detect_content
 from .sms import send_sms_alert
 from rest_framework import status
-
+from bson import ObjectId
+from .models import Report
 @api_view(["POST"])
 def register_user(request):
    
     serializer = UserSerializer(data=request.data)
 
     if serializer.is_valid():
-        data = serializer.validated_data
+        userdata = serializer.validated_data
 
-        if User.objects.filter(username=data['username']).first():
-            return Response({"message": "Username already exists"}, status=status.HTTP_409_CONFLICT)
+        if User.objects.filter(username=userdata['username']).first():
+            return Response({"message": "Username already exists" }, status=status.HTTP_409_CONFLICT)
 
         
-        serializer.save()
-        return Response({"message": "User registered successfully"}, status=status.HTTP_201_CREATED)
+        user = serializer.save()
+        Report.objects.create(secret_key=user.secret_key)
+        return Response({"message": "User registered successfully" ,"Data" : UserSerializer(user).data }, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -30,7 +32,7 @@ def login_user(request):
     data = request.data
     try:
         user = User.objects.get(username=data["username"], password=data["password"])
-        return Response({"message": "Login successful", "phone": user.phone})
+        return Response({"unique_id": str(user.id)})
     except User.DoesNotExist:
         return Response({"message": "Invalid credentials"}, status=401)
     
@@ -38,15 +40,23 @@ def login_user(request):
 
 @api_view(["POST"])
 def check_text(request):
-    username = request.data.get("username")
+    unique_id = request.data.get("sct_id")
     text = request.data.get("text")
 
-    user = User.objects(username=username).first()
+    user = User.objects(id=ObjectId(unique_id)).first()
     if not user:
         return Response({"message": "User not found"}, status=404)
 
     detected, details = detect_content(text)
     if detected:
-        send_sms_alert(user.phone, details, username)
+        # send_sms_alert(user.phone, details, username)
+        
         return Response({"alert": True, "details": details})
     return Response({"alert": False})
+
+@api_view(["POST"])
+def message(request):
+    msg = request.data.get('text')
+    if not msg :
+        return Response({"message" : "message Not recive" } , status=400)
+    return Response({"message" : msg})

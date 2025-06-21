@@ -4,4 +4,5 @@
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_your_private_key">Enter Your Private Key</string>
     <string name="update_changes">Update Changes</string>
+    <string name="q">Q</string>
 </resources>

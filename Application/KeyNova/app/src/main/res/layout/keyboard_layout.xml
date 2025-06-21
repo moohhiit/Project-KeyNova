@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/keyboard_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#2B1B17"
-    android:padding="8dp">
+    android:padding="4dp"
+    android:background="#000000">
 
-    <!-- First Row -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <!-- Row 1 -->
 
-        <Button android:id="@+id/buttonQ" android:text="Q" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonW" android:text="W" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonE" android:text="E" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonR" android:text="R" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonT" android:text="T" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonY" android:text="Y" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonU" android:text="U" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonI" android:text="I" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonO" android:text="O" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonP" android:text="P" style="@style/KeyButton"/>
-    </LinearLayout>
 
-    <!-- Second Row -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <!-- Row 1: Q - P -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
 
-        <Button android:id="@+id/buttonA" android:text="A" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonS" android:text="S" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonD" android:text="D" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonF" android:text="F" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonG" android:text="G" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonH" android:text="H" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonJ" android:text="J" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonK" android:text="K" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonL" android:text="L" style="@style/KeyButton"/>
-    </LinearLayout>
+            <Button android:id="@+id/buttonQ" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="Q" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonW" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="W" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonE" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="E" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonR" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="R" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonT" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="T" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonY" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="Y" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonU" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="U" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonI" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="I" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonO" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="O" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonP" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="P" android:textColor="#FFF" android:background="@drawable/key_background"/>
+        </LinearLayout>
 
-    <!-- Third Row -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <!-- Row 2: A - L -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="9">
 
-        <Button android:id="@+id/buttonShift" android:text="↑" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonZ" android:text="Z" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonX" android:text="X" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonC" android:text="C" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonV" android:text="V" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonB" android:text="B" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonN" android:text="N" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonM" android:text="M" style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonBackspace" android:text="⌫" style="@style/KeyButton"/>
-    </LinearLayout>
+            <Button android:id="@+id/buttonA" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="A" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonS" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="S" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonD" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="D" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonF" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="F" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonG" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="G" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonH" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="H" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonJ" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="J" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonK" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="K" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonL" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="L" android:textColor="#FFF" android:background="@drawable/key_background"/>
+
+        </LinearLayout>
+
+        <!-- Row 3: Z - M -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="7">
+
+            <Button android:id="@+id/buttonZ" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="Z" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonX" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="X" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonC" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="C" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonV" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="V" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonB" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="B" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonN" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="N" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonM" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="M" android:textColor="#FFF" android:background="@drawable/key_background"/>
+            <Button android:id="@+id/buttonBackspace" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1" android:text="⌫" android:textColor="#FFF" android:background="@drawable/key_background"/>
+        </LinearLayout>
+
+        <!-- Row 4: Space Bar -->
+
+
 
     <!-- Fourth Row -->
     <LinearLayout
@@ -65,9 +75,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button android:id="@+id/button123" android:text="?123" style="@style/KeyButton"/>
+
         <Button android:id="@+id/buttonComma" android:text="," style="@style/KeyButton"/>
-        <Button android:id="@+id/buttonSpace" android:text="Space" style="@style/KeyButton"/>
+
+        <Button
+            android:id="@+id/buttonSpace"
+            style="@style/SpaceButton"
+            android:layout_width="181dp"
+            android:text="Space" />
         <Button android:id="@+id/buttonDot" android:text="." style="@style/KeyButton"/>
         <Button android:id="@+id/buttonEnter" android:text="⏎" style="@style/KeyButton"/>
     </LinearLayout>
