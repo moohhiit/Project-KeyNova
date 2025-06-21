@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-yu%qljz2^aqe%2xpey@r%50wkpthvg$fp1sjn^xrpcu#s6d^e-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://project-keynova.onrender.com']
 
 
 # Application definition
