@@ -48,7 +48,7 @@ typing_extensions==4.14.0
 tzdata==2025.2
 urllib3==2.4.0
 yarl==1.20.1
-Django>=4.2,<5.0
+Django==5.2.3
 gunicorn
 psycopg2-binary
 python-decouple
