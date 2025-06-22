@@ -8,6 +8,8 @@ from bson import ObjectId
 from .models import Report
 @api_view(["POST"])
 def register_user(request):
+    if request.method == 'GET':
+        return Response({"info": "Please send a POST request with username and password."}, status=200)
    
     serializer = UserSerializer(data=request.data)
 
@@ -55,4 +57,4 @@ def message(request):
     msg = request.data.get('text')
     if not msg :
         return Response({"message" : "message Not recive" } , status=400)
-    return Response({"message" : msg})
+    return Response({"message" : msg} , status=200)
