@@ -2,8 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import User
 from .serializers import UserSerializer
-from .ml_model import detect_content
-from .sms import send_sms_alert
+
 from rest_framework import status
 from bson import ObjectId
 from .models import Report
@@ -47,11 +46,8 @@ def check_text(request):
     if not user:
         return Response({"message": "User not found"}, status=404)
 
-    detected, details = detect_content(text)
-    if detected:
-        # send_sms_alert(user.phone, details, username)
-        
-        return Response({"alert": True, "details": details})
+    
+  
     return Response({"alert": False})
 
 @api_view(["POST"])
