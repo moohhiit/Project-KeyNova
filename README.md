@@ -11,7 +11,7 @@ KeyNova is a child-safe typing companion that uses a backend Django server and a
 
 Project-KeyNova/
 │
-├── Application/KeyNova         # Android keyboard app (Java/Kotlin)
+├── Application/KeyNova         # Android keyboard app (JavaScript/Kotlin)
 ├── KeyNovaWeb                  # Web UI for admin/parent control (React/HTML)
 ├── ML                          # Jupyter notebooks and training for content filtering
 ├── Server                      # Django backend + ML integration
