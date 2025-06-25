@@ -10,7 +10,7 @@ class User(Document):
     def __str__(self):
         return self.username
     
-class ContentReport(Document):
+class Report(Document):
     uni_id = StringField(required=True)
     text = StringField(required=True)
     category = StringField(required=True)
