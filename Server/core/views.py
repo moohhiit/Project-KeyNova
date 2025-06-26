@@ -26,22 +26,6 @@ def register_user(request):
         return Response({"message": "User registered successfully" ,"Data" : UserSerializer(user).data }, status=status.HTTP_201_CREATED)
 
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-@api_view(['GET'])
-def get_reports(request, uni_id):
-    reports = Report.objects(uni_id=uni_id).order_by('-timestamp')
-    data = []
-
-    for report in reports:
-        data.append({
-            'text': report.text,
-            'category': report.category,
-            'reason': report.reason,
-            'timestamp': report.timestamp.strftime("%Y-%m-%d %H:%M:%S")
-        })
-
-    return Response({'reports': data})
-
-
 
 @api_view(["POST"])
 def login_user(request):
